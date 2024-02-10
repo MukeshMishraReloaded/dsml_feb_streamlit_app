@@ -34,7 +34,7 @@ eve_mins = col1.slider("Eve Mins.",
 night_mins = col2.slider("Night Mins.",
                         0.0, 59.64, step=7.5)
 account_length = col2.slider("Account Length",
-                        1, 243, step=4)
+                        1.0, 243.0, step=4.0)
 
 
 if(st.button("Predict Churn")):
