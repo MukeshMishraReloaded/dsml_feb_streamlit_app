@@ -11,6 +11,13 @@ st.write("""
 """)
 
 def model_pred(day_mins, eve_mins, night_mins, custsvc_calls, intl_plan, account_length):
+    # Convert input parameters to numeric types
+    day_mins = float(day_mins)
+    eve_mins = float(eve_mins)
+    night_mins = float(night_mins)
+    custsvc_calls = int(custsvc_calls)
+    intl_plan = int(intl_plan)  # Assuming intl_plan is binary (0 or 1)
+    account_length = int(account_length)
 
     ##loading the model
     with open("churn_prediction.pkl", "rb") as file:
@@ -34,7 +41,7 @@ eve_mins = col1.slider("Eve Mins.",
 night_mins = col2.slider("Night Mins.",
                         0.0, 59.64, step=7.5)
 account_length = col2.slider("Account Length",
-                        1.0, 243.0, step=4.0)
+                        1, 243, step=4)
 
 
 if(st.button("Predict Churn")):
