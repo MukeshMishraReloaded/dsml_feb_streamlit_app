@@ -37,9 +37,9 @@ intl_plan = col3.selectbox("Intl. Plan",
                         [0, 1])
 
 day_charge = col1.slider("Day Charge",
-                        0, 59.64, step=7.5)
+                        0.0, 59.64, step=7.5)
 day_mins = col2.slider("Day Mins.",
-                        0, 350.80, step=10)
+                        0.0, 350.80, step=10.0)
 
 
 if(st.button("Predict Churn")):
