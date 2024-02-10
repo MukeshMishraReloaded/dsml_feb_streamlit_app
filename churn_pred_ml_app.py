@@ -34,7 +34,7 @@ custsvc_calls = col2.selectbox("CustServ Calls",
                             [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 
 intl_plan = col3.slider("Intl. Plan",
-                        [0, 1])
+                        (0, 1))
 
 day_charge = col1.slider("Day Charge",
                         0, 59.64, step=7.5)
