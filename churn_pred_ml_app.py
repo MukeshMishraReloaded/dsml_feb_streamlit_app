@@ -4,7 +4,7 @@ import datetime
 
 import pickle
 
-cars_df = pd.read_csv("./churn_logistic.csv")
+churn = pd.read_csv("./churn_logistic.csv")
 
 st.write("""
 # AT&T Subscriber Churn Prediction
