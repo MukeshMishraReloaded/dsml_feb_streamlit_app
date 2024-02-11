@@ -37,6 +37,6 @@ account_length = st.slider("Account Length", 1, 243, step=4)
 
 if st.button("Predict Churn"):
     pr = model_pred(day_mins, eve_mins, night_mins, custsvc_calls, intl_plan, account_length)
-    st.write("Predicted churn value is:", pr)
+    st.write("Predicted churn value is:", str(pr))
 
 st.dataframe(churn.head(2))
