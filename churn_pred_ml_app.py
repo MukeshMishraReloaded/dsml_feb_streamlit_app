@@ -30,9 +30,9 @@ with col1:
 with col2:
     intl_plan = st.selectbox("Does the subscriber have an Intl. Plan?", [0, 1])
 
-day_mins = st.slider("Day Mins", 0.0, 350.80, step=10.0)
-eve_mins = st.slider("Eve Mins", 0.0, 59.64, step=7.5)
-night_mins = st.slider("Night Mins", 0.0, 59.64, step=7.5)
+day_mins = st.slider("Day Minutes", 0.0, 350.80, step=10.0)
+eve_mins = st.slider("Eve Minutes", 0.0, 59.64, step=7.5)
+night_mins = st.slider("Night Minutes", 0.0, 59.64, step=7.5)
 account_length = st.slider("Age of user account(in months): ", 1, 243, step=4)
 
 if st.button("Predict Churn"):
