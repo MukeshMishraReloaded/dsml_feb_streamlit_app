@@ -38,7 +38,7 @@ account_length = st.slider("Age of user account(in months): ", 1, 243, step=4)
 if st.button("Predict Churn"):
     pr = model_pred(day_mins, eve_mins, night_mins, custsvc_calls, intl_plan, account_length)
     if pr == 0:
-        st.write("This subscriber is unlikely to churn!")
+        st.subheader("This subscriber is unlikely to churn!")
     else:
-        st.write("This subscriber may be considering exiting the service!")
+        st.subheader("This subscriber may be considering exiting the service!")
 st.dataframe(churn.head(2))
