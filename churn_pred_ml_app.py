@@ -1,8 +1,8 @@
 import pandas as pd
 import streamlit as st
 import datetime
-
 import pickle
+import numpy as np  # Ensure you import NumPy
 
 churn = pd.read_csv("./churn_logistic.csv")
 
@@ -11,41 +11,32 @@ st.write("""
 """)
 
 def model_pred(day_mins, eve_mins, night_mins, custsvc_calls, intl_plan, account_length):
-    # Convert input parameters to numeric types
-    day_mins = float(day_mins)
-    eve_mins = float(eve_mins)
-    night_mins = float(night_mins)
-    custsvc_calls = int(custsvc_calls)
-    intl_plan = int(intl_plan)  # Assuming intl_plan is binary (0 or 1)
-    account_length = int(account_length)
-
-    ##loading the model
+    # Convert input parameters to numeric types directly in Streamlit widgets
+    
+    # Load the model
     with open("churn_prediction.pkl", "rb") as file:
         reg_model = pickle.load(file)
-
-    input_features = [['Day Mins', 'Eve Mins', 'Night Mins', 'CustServ Calls', 'Intl Plan', 'Account Length']]
+    
+    # Ensure the order of features matches the model's training order
+    input_features = np.array([[day_mins, eve_mins, night_mins, custsvc_calls, intl_plan, account_length]])
+    
     return reg_model.predict(input_features)
 
 col1, col2 = st.columns(2)
 
-custsvc_calls = col1.selectbox("CustServ Calls",
-                            [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+with col1:
+    custsvc_calls = st.selectbox("CustServ Calls", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 
-intl_plan = col2.selectbox("Intl. Plan",
-                        [0, 1])
+with col2:
+    intl_plan = st.selectbox("Intl. Plan", [0, 1])
 
-day_mins = st.slider("Day Mins.",
-                        0.0, 350.80, step=10.0)
-eve_mins = st.slider("Eve Mins.",
-                        0.0, 59.64, step=7.5)
-night_mins = st.slider("Night Mins.",
-                        0.0, 59.64, step=7.5)
-account_length = st.slider("Account Length",
-                        1, 243, step=4)
+day_mins = st.slider("Day Mins", 0.0, 350.80, step=10.0)
+eve_mins = st.slider("Eve Mins", 0.0, 59.64, step=7.5)
+night_mins = st.slider("Night Mins", 0.0, 59.64, step=7.5)
+account_length = st.slider("Account Length", 1, 243, step=4)
 
-
-if(st.button("Predict Churn")):
+if st.button("Predict Churn"):
     pr = model_pred(day_mins, eve_mins, night_mins, custsvc_calls, intl_plan, account_length)
-    st.text("Predicted churn value is: "+ str(pr))
+    st.write("Predicted churn value is:", pr)
 
 st.dataframe(churn.head(2))
