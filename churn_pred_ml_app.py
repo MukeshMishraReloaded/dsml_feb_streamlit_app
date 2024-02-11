@@ -25,19 +25,18 @@ def model_pred(day_mins, eve_mins, night_mins, custsvc_calls, intl_plan, account
 col1, col2 = st.columns(2)
 
 with col1:
-    custsvc_calls = st.selectbox("CustServ Calls", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+    custsvc_calls = st.selectbox("Calls made to customer service", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 
 with col2:
-    intl_plan = st.selectbox("Intl. Plan", [0, 1])
+    intl_plan = st.selectbox("Does the subscriber have an Intl. Plan", [0, 1])
 
 day_mins = st.slider("Day Mins", 0.0, 350.80, step=10.0)
 eve_mins = st.slider("Eve Mins", 0.0, 59.64, step=7.5)
 night_mins = st.slider("Night Mins", 0.0, 59.64, step=7.5)
-account_length = st.slider("Account Length", 1, 243, step=4)
+account_length = st.slider("Age of user account", 1, 243, step=4)
 
 if st.button("Predict Churn"):
     pr = model_pred(day_mins, eve_mins, night_mins, custsvc_calls, intl_plan, account_length)
-    #st.write("Predicted churn value is:", str(pr))
     if pr == 0:
         st.write("This subscriber is unlikely to churn!")
     else:
