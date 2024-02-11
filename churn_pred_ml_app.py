@@ -34,13 +34,13 @@ custsvc_calls = col1.selectbox("CustServ Calls",
 intl_plan = col2.selectbox("Intl. Plan",
                         [0, 1])
 
-day_mins = col1.slider("Day Mins.",
+day_mins = st.slider("Day Mins.",
                         0.0, 350.80, step=10.0)
-eve_mins = col1.slider("Eve Mins.",
+eve_mins = st.slider("Eve Mins.",
                         0.0, 59.64, step=7.5)
-night_mins = col2.slider("Night Mins.",
+night_mins = st.slider("Night Mins.",
                         0.0, 59.64, step=7.5)
-account_length = col2.slider("Account Length",
+account_length = st.slider("Account Length",
                         1, 243, step=4)
 
 
