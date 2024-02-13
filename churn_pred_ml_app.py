@@ -7,7 +7,7 @@ import numpy as np  # Ensure you import NumPy
 churn = pd.read_csv("./churn_logistic.csv")
 
 st.write("""
-# Telco churn prediction
+# Telco churn
 """)
 
 def model_pred(day_mins, eve_mins, night_mins, custsvc_calls, intl_plan, account_length):
