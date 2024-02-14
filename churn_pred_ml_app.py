@@ -7,7 +7,7 @@ import numpy as np  # Ensure you import NumPy
 churn = pd.read_csv("./churn_logistic.csv")
 
 st.write("""
-# Telco churn
+# Telco churn predictor
 """)
 
 def model_pred(day_mins, eve_mins, night_mins, custsvc_calls, intl_plan, account_length):
@@ -18,7 +18,7 @@ def model_pred(day_mins, eve_mins, night_mins, custsvc_calls, intl_plan, account
         reg_model = pickle.load(file)
     
     # Ensure the order of features matches the model's training order
-    input_features = np.array([[day_mins, day_charge, eve_mins, night_mins, custsvc_calls, intl_plan, account_length]])
+    input_features = np.array([[day_mins, eve_mins, night_mins, custsvc_calls, intl_plan, account_length]])
     
     return reg_model.predict(input_features)
 
