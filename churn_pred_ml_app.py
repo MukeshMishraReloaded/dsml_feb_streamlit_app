@@ -33,7 +33,7 @@ with col2:
 day_mins = st.slider("Day Minutes", 0.0, 350.80, step=10.0)
 eve_mins = st.slider("Eve Minutes", 0.0, 363.70, step=7.5)
 night_mins = st.slider("Night Minutes", 0.0, 395.00, step=7.5)
-day_charge = st.slider("Day Charge", 0.0, 59.64, step=7.5)
+day_charge = st.slider("Day Charge", 0.0, 59.64, step=1.2)
 account_length = st.slider("Age of user account(in months): ", 1, 243, step=4)
 
 if st.button("Predict Churn"):
