@@ -10,7 +10,7 @@ st.write("""
 # Telco churn
 """)
 
-def model_pred(day_mins, eve_mins, night_mins, custsvc_calls, intl_plan, account_length):
+def model_pred(day_mins, day_charge, eve_mins, night_mins, custsvc_calls, intl_plan, account_length):
     # Convert input parameters to numeric types directly in Streamlit widgets
     
     # Load the model
@@ -18,7 +18,7 @@ def model_pred(day_mins, eve_mins, night_mins, custsvc_calls, intl_plan, account
         reg_model = pickle.load(file)
     
     # Ensure the order of features matches the model's training order
-    input_features = np.array([[day_mins, eve_mins, night_mins, custsvc_calls, intl_plan, account_length]])
+    input_features = np.array([[day_mins, day_charge, eve_mins, night_mins, custsvc_calls, intl_plan, account_length]])
     
     return reg_model.predict(input_features)
 
@@ -31,12 +31,13 @@ with col2:
     intl_plan = st.selectbox("Does the subscriber have an Intl. Plan?", [0, 1])
 
 day_mins = st.slider("Day Minutes", 0.0, 350.80, step=10.0)
-eve_mins = st.slider("Eve Minutes", 0.0, 59.64, step=7.5)
-night_mins = st.slider("Night Minutes", 0.0, 59.64, step=7.5)
+eve_mins = st.slider("Eve Minutes", 0.0, 363.70, step=7.5)
+night_mins = st.slider("Night Minutes", 0.0, 395.00, step=7.5)
+day_charge = st.slider("Day Charge", 0.0, 59.64, step=7.5)
 account_length = st.slider("Age of user account(in months): ", 1, 243, step=4)
 
 if st.button("Predict Churn"):
-    pr = model_pred(day_mins, eve_mins, night_mins, custsvc_calls, intl_plan, account_length)
+    pr = model_pred(day_mins, day_charge, eve_mins, night_mins, custsvc_calls, intl_plan, account_length)
     if pr == 0:
         st.subheader("This subscriber is unlikely to churn!")
     else:
