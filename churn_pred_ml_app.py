@@ -41,4 +41,4 @@ if st.button("Predict Churn"):
         st.subheader("This subscriber is unlikely to churn!")
     else:
         st.subheader("This subscriber may be considering exiting the service!")
-st.dataframe(churn.head(2))
+#st.dataframe(churn.head(2))
