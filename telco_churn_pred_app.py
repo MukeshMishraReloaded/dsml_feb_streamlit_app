@@ -7,7 +7,7 @@ import numpy as np  # Ensure you import NumPy
 churn = pd.read_csv("./telco_churn_data.csv")
 
 st.write("""
- Telco churn prediction
+ #Telco churn prediction
 """)
 def model_pred(SeniorCitizen, tenure, PhoneService, MultipleLines, InternetService, OnlineSecurity,  OnlineBackup, TechSupport, StreamingMovies, Contract, PaperlessBilling, PaymentMethod):
     # Load the model
@@ -16,6 +16,7 @@ def model_pred(SeniorCitizen, tenure, PhoneService, MultipleLines, InternetServi
  
     # Ensure the order of features matches the model's training order
     features = ['SeniorCitizen', 'tenure', 'PhoneService', 'MultipleLines', 'InternetService', 'OnlineSecurity',  'OnlineBackup', 'TechSupport', 'StreamingMovies','Contract', 'PaperlessBilling', 'PaymentMethod']
+    categorical_features = ['SeniorCitizen', 'PhoneService', 'MultipleLines', 'InternetService', 'OnlineSecurity',  'OnlineBackup', 'TechSupport', 'StreamingMovies','Contract', 'PaperlessBilling', 'PaymentMethod']
     feature_vals = np.array([[SeniorCitizen, tenure, PhoneService, MultipleLines, InternetService, OnlineSecurity,  OnlineBackup, TechSupport, StreamingMovies, Contract, PaperlessBilling, PaymentMethod]])
     # creating the dataframe 
     X_sample = pd.DataFrame(data=feature_vals,  
@@ -34,38 +35,39 @@ col1, col2, col3, col4, col5, col6, col7, col8, col9, col10, col11 = st.columns(
 
 with col1:
     SeniorCitizen = st.selectbox("Is the subscriber senior citizen? ", [0, 1])
+st.write("")
 
 with col2:
     PhoneService = st.selectbox("Does the subscriber have a Phone service?", [0, 1])
-
+st.write("")
 with col3:
     MultipleLines = st.selectbox("Does the subscriber have multiple phone lines?", ['No', 'No phone service', 'Yes'])
-
+st.write("")
 with col4:
     InternetService = st.selectbox("Does the subscriber have internet service?", ['DSL', 'Fiber optic', 'No'])
-
+st.write("")
 with col5:
     OnlineSecurity = st.selectbox("Does the subscriber have Online Security service?", ['No', 'No internet service', 'Yes'])
-
+st.write("")
 with col6:
     OnlineBackup = st.selectbox("Does the subscriber have Online backup service?", ['No', 'No internet service', 'Yes'])
-
+st.write("")
 with col7:
     TechSupport = st.selectbox("Does the subscriber have Tech Support service?", ['No', 'No internet service', 'Yes'])
-
+st.write("")
 with col8:
     StreamingMovies = st.selectbox("Does the subscriber have Streaming Movies service?", ['No', 'No internet service', 'Yes'])
-
+st.write("")
 with col9:
     Contract = st.selectbox("What type of contract does the subscriber have?", ['Month-to-month', 'One year', 'Two year'])
-    
+st.write("")    
 with col10:
     PaperlessBilling = st.selectbox("Does the subscriber have paperless billing?", [0, 1])
-    
+st.write("")    
 with col11:
     PaymentMethod = st.selectbox("What type of payment method does the subscriber have?", ['Electronic check', 'Mailed check', 'Bank transfer (automatic)', 'Credit card (automatic)'])
-    
-tenure = st.slider("Lenght of duration of the account with the service provider(in months): ", 1, 243, step=4)
+st.write("")    
+tenure = st.slider("Lenght of duration of the account with the service provider(in months): ", 0, 108, step=4)
 
 if st.button("Predict Churn"):
     pr = model_pred(SeniorCitizen, tenure, PhoneService, MultipleLines, InternetService, OnlineSecurity,  OnlineBackup, TechSupport, StreamingMovies, Contract, PaperlessBilling, PaymentMethod)
