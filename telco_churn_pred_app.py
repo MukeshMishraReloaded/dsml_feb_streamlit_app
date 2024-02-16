@@ -28,8 +28,8 @@ def model_pred(SeniorCitizen, tenure, PhoneService, MultipleLines, InternetServi
     #Prediction logic
     best_threshold=0.66
     predicted_probabilities = pipeline.predict_proba(X_input)
-    st.write(predicted_probabilities[:, 1])
-    st.write(best_threshold)
+    #st.write(predicted_probabilities[:, 1])
+    #st.write(best_threshold)
     predicted_classes = (predicted_probabilities[:, 1] >= best_threshold).astype(int)
     return predicted_classes[0]
 
