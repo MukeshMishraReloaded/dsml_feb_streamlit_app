@@ -60,7 +60,7 @@ with col10:
     PaperlessBilling = st.selectbox("Does the subscriber have paperless billing?", [0, 1])
 with col11:
     PaymentMethod = st.selectbox("What type of payment method does the subscriber have?", ['Electronic check', 'Mailed check', 'Bank transfer (automatic)', 'Credit card (automatic)'])
-tenure = st.slider("Lenght of duration of the account with the service provider(in months): ", 0, 108, step=4)
+tenure = st.slider("Lenght of duration of the account with the service provider(in months): ", 0, 108, step=1)
 if st.button("Predict Churn"):
     pr = model_pred(SeniorCitizen, tenure, PhoneService, MultipleLines, InternetService, OnlineSecurity,  OnlineBackup, TechSupport, StreamingMovies, Contract, PaperlessBilling, PaymentMethod)
     if pr == 0:
