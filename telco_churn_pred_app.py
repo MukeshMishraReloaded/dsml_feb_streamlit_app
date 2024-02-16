@@ -4,39 +4,75 @@ import datetime
 import pickle
 import numpy as np  # Ensure you import NumPy
 
-churn = pd.read_csv("./churn_logistic.csv")
+churn = pd.read_csv("./telco_churn_data.csv")
 
 st.write("""
-# Telco churn predictor
+# Telco churn prediction
 """)
 
-def model_pred(day_mins, eve_mins, night_mins, custsvc_calls, intl_plan, account_length):
+def model_pred(SeniorCitizen, tenure, PhoneService, MultipleLines, InternetService, OnlineSecurity,  OnlineBackup, TechSupport, StreamingMovies, Contract, PaperlessBilling, PaymentMethod)
+):
     # Convert input parameters to numeric types directly in Streamlit widgets
     
     # Load the model
-    with open("churn_prediction.pkl", "rb") as file:
-        reg_model = pickle.load(file)
-    
+    with open("telco_churn_prediction.pkl", "rb") as file:
+        pipeline = pickle.load(file)
+ 
     # Ensure the order of features matches the model's training order
-    input_features = np.array([[day_mins, eve_mins, night_mins, custsvc_calls, intl_plan, account_length]])
+    features = ['SeniorCitizen', 'tenure', 'PhoneService', 'MultipleLines', 'InternetService', 'OnlineSecurity',  'OnlineBackup', 'TechSupport', 'StreamingMovies','Contract', 'PaperlessBilling', 'PaymentMethod']
+    feature_vals = np.array([[SeniorCitizen, tenure, PhoneService, MultipleLines, InternetService, OnlineSecurity,  OnlineBackup, TechSupport, StreamingMovies, Contract, PaperlessBilling, PaymentMethod]])
+    # creating the dataframe 
+    X_sample = pd.DataFrame(data=feature_vals,  
+                  columns = features) 
+    for col in categorical_features:
+        X_sample[col] = X_sample[col].astype('category')
     
-    return reg_model.predict(input_features)
+    #Prediction logic
+    predicted_probabilities = pipeline.predict_proba(X_sample)
+    #print(predicted_probabilities[:, 1])
+    predicted_classes = (predicted_probabilities[:, 1] >= best_threshold).astype(int)
+    #print(best_threshold)
+    return predicted_classes[0]
 
-col1, col2 = st.columns(2)
+col1, col2, col3, col4, col5, col6, col7, col8, col9, col10, col11 = st.columns(11)
 
 with col1:
-    custsvc_calls = st.selectbox("Calls made to customer service: ", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+    SeniorCitizen = st.selectbox("Is the subscriber senior citizen? ", [0, 1])
 
 with col2:
-    intl_plan = st.selectbox("Does the subscriber have an Intl. Plan?", [0, 1])
+    PhoneService = st.selectbox("Does the subscriber have a Phone service?", [0, 1])
 
-day_mins = st.slider("Day Minutes", 0.0, 350.80, step=10.0)
-eve_mins = st.slider("Eve Minutes", 0.0, 363.70, step=7.5)
-night_mins = st.slider("Night Minutes", 0.0, 395.00, step=7.5)
-account_length = st.slider("Age of user account(in months): ", 1, 243, step=4)
+with col3:
+    MultipleLines = st.selectbox("Does the subscriber have multiple phone lines?", ['No', 'No phone service', 'Yes'])
+
+with col4:
+    InternetService = st.selectbox("Does the subscriber have internet service?", ['DSL', 'Fiber optic', 'No'])
+
+with col5:
+    OnlineSecurity = st.selectbox("Does the subscriber have Online Security service?", ['No', 'No internet service', 'Yes'])
+
+with col6:
+    OnlineBackup = st.selectbox("Does the subscriber have Online backup service?", ['No', 'No internet service', 'Yes'])
+
+with col7:
+    TechSupport = st.selectbox("Does the subscriber have Tech Support service?", ['No', 'No internet service', 'Yes'])
+
+with col8:
+    StreamingMovies = st.selectbox("Does the subscriber have Streaming Movies service?", ['No', 'No internet service', 'Yes'])
+
+with col9:
+    Contract = st.selectbox("What type of contract does the subscriber have?", ['Month-to-month', 'One year', 'Two year'])
+    
+with col10:
+    PaperlessBilling = st.selectbox("Does the subscriber have paperless billing?", [0, 1])
+    
+with col11:
+    PaymentMethod = st.selectbox("What type of payment method does the subscriber have?", ['Electronic check', 'Mailed check', 'Bank transfer (automatic)', 'Credit card (automatic)'])
+    
+tenure = st.slider("Lenght of duration of the account with the service provider(in months): ", 1, 243, step=4)
 
 if st.button("Predict Churn"):
-    pr = model_pred(day_mins, eve_mins, night_mins, custsvc_calls, intl_plan, account_length)
+    pr = model_pred(SeniorCitizen, tenure, PhoneService, MultipleLines, InternetService, OnlineSecurity,  OnlineBackup, TechSupport, StreamingMovies, Contract, PaperlessBilling, PaymentMethod)
     if pr == 0:
         st.subheader("This subscriber is unlikely to churn!")
     else:
