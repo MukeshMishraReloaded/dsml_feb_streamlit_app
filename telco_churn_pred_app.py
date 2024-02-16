@@ -6,8 +6,8 @@ import numpy as np  # Ensure you import NumPy
 
 churn = pd.read_csv("./telco_churn_data.csv")
 
-st.subheader("""
- #Telco churn prediction
+st.header("""
+ TELCO CHURN PREDICTOR
 """)
 
 def model_pred(SeniorCitizen, tenure, PhoneService, MultipleLines, InternetService, OnlineSecurity,  OnlineBackup, TechSupport, StreamingMovies, Contract, PaperlessBilling, PaymentMethod):
