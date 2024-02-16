@@ -35,14 +35,14 @@ col1, col2, col3, col4, col5, col6, col7, col8, col9, col10, col11 = st.columns(
 
 with col1:
     SeniorCitizen = st.selectbox("Is the subscriber senior citizen? ", [0, 1])
-st.write("")
+st.write("\n")
 
 with col2:
     PhoneService = st.selectbox("Does the subscriber have a Phone service?", [0, 1])
-st.write("")
+st.write("\n")
 with col3:
     MultipleLines = st.selectbox("Does the subscriber have multiple phone lines?", ['No', 'No phone service', 'Yes'])
-st.write("")
+st.write("\n")
 with col4:
     InternetService = st.selectbox("Does the subscriber have internet service?", ['DSL', 'Fiber optic', 'No'])
 st.write("")
