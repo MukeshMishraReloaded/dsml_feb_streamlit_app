@@ -1,6 +1,6 @@
-streamlit
+streamlit==1.0.0
+pandas==1.3.3
+category_encoders==2.2.2
 numpy
-pandas
 scikit-learn
 yfinance
-category_encoders
