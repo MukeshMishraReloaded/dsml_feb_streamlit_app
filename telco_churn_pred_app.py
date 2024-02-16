@@ -39,48 +39,26 @@ col7, col8 = st.columns(2)
 col9, col10, col11 = st.columns(3)
 with col1:
     SeniorCitizen = st.selectbox("Is the subscriber senior citizen? ", [0, 1])
-# Add vertical space
-st.markdown("<br><br>", unsafe_allow_html=True)
 with col2:
     PhoneService = st.selectbox("Does the subscriber have a Phone service?", [0, 1])
-# Add vertical space
-st.markdown("<br><br>", unsafe_allow_html=True)
 with col3:
     MultipleLines = st.selectbox("Does the subscriber have multiple phone lines?", ['No', 'No phone service', 'Yes'])
-# Add vertical space
-st.markdown("<br><br>", unsafe_allow_html=True)
 with col4:
     InternetService = st.selectbox("Does the subscriber have internet service?", ['DSL', 'Fiber optic', 'No'])
-# Add vertical space
-st.markdown("<br><br>", unsafe_allow_html=True)
 with col5:
     OnlineSecurity = st.selectbox("Does the subscriber have Online Security service?", ['No', 'No internet service', 'Yes'])
-# Add vertical space
-st.markdown("<br><br>", unsafe_allow_html=True)
 with col6:
     OnlineBackup = st.selectbox("Does the subscriber have Online backup service?", ['No', 'No internet service', 'Yes'])
-# Add vertical space
-st.markdown("<br><br>", unsafe_allow_html=True)
 with col7:
     TechSupport = st.selectbox("Does the subscriber have Tech Support service?", ['No', 'No internet service', 'Yes'])
-# Add vertical space
-st.markdown("<br><br>", unsafe_allow_html=True)
 with col8:
     StreamingMovies = st.selectbox("Does the subscriber have Streaming Movies service?", ['No', 'No internet service', 'Yes'])
-# Add vertical space
-st.markdown("<br><br>", unsafe_allow_html=True)
 with col9:
     Contract = st.selectbox("What type of contract does the subscriber have?", ['Month-to-month', 'One year', 'Two year'])
-# Add vertical space
-st.markdown("<br><br>", unsafe_allow_html=True)
 with col10:
     PaperlessBilling = st.selectbox("Does the subscriber have paperless billing?", [0, 1])
-# Add vertical space
-st.markdown("<br><br>", unsafe_allow_html=True)
 with col11:
     PaymentMethod = st.selectbox("What type of payment method does the subscriber have?", ['Electronic check', 'Mailed check', 'Bank transfer (automatic)', 'Credit card (automatic)'])
-# Add vertical space
-st.markdown("<br><br>", unsafe_allow_html=True)
 tenure = st.slider("Lenght of duration of the account with the service provider(in months): ", 0, 108, step=4)
 if st.button("Predict Churn"):
     pr = model_pred(SeniorCitizen, tenure, PhoneService, MultipleLines, InternetService, OnlineSecurity,  OnlineBackup, TechSupport, StreamingMovies, Contract, PaperlessBilling, PaymentMethod)
