@@ -20,13 +20,13 @@ def model_pred(SeniorCitizen, tenure, PhoneService, MultipleLines, InternetServi
     categorical_features = ['SeniorCitizen', 'PhoneService', 'MultipleLines', 'InternetService', 'OnlineSecurity',  'OnlineBackup', 'TechSupport', 'StreamingMovies','Contract', 'PaperlessBilling', 'PaymentMethod']
     feature_vals = np.array([[SeniorCitizen, int(tenure), PhoneService, MultipleLines, InternetService, OnlineSecurity,  OnlineBackup, TechSupport, StreamingMovies, Contract, PaperlessBilling, PaymentMethod]])
     # creating the dataframe 
-    X_sample = pd.DataFrame(data=feature_vals,  
+    X_input = pd.DataFrame(data=feature_vals,  
                   columns = features) 
     for col in categorical_features:
-        X_sample[col] = X_sample[col].astype('category')
+        X_input[col] = X_input[col].astype('category')
     
     #Prediction logic
-    predicted_probabilities = pipeline.predict_proba(X_sample)
+    predicted_probabilities = pipeline.predict_proba(X_input)
     st.write(predicted_probabilities[:, 1])
     st.write(best_threshold)
     predicted_classes = (predicted_probabilities[:, 1] >= best_threshold).astype(int)
