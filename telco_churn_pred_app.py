@@ -26,6 +26,7 @@ def model_pred(SeniorCitizen, tenure, PhoneService, MultipleLines, InternetServi
         X_input[col] = X_input[col].astype('category')
     
     #Prediction logic
+    best_threshold=0.66
     predicted_probabilities = pipeline.predict_proba(X_input)
     st.write(predicted_probabilities[:, 1])
     st.write(best_threshold)
