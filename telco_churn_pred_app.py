@@ -6,7 +6,7 @@ import numpy as np  # Ensure you import NumPy
 
 churn = pd.read_csv("./telco_churn_data.csv")
 
-st.head("""
+st.subheader("""
  #Telco churn prediction
 """)
 
