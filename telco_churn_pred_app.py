@@ -18,7 +18,7 @@ def model_pred(SeniorCitizen, tenure, PhoneService, MultipleLines, InternetServi
     # Ensure the order of features matches the model's training order
     features = ['SeniorCitizen', 'tenure', 'PhoneService', 'MultipleLines', 'InternetService', 'OnlineSecurity',  'OnlineBackup', 'TechSupport', 'StreamingMovies','Contract', 'PaperlessBilling', 'PaymentMethod']
     categorical_features = ['SeniorCitizen', 'PhoneService', 'MultipleLines', 'InternetService', 'OnlineSecurity',  'OnlineBackup', 'TechSupport', 'StreamingMovies','Contract', 'PaperlessBilling', 'PaymentMethod']
-    feature_vals = np.array([[SeniorCitizen, tenure, PhoneService, MultipleLines, InternetService, OnlineSecurity,  OnlineBackup, TechSupport, StreamingMovies, Contract, PaperlessBilling, PaymentMethod]])
+    feature_vals = np.array([[SeniorCitizen, int(tenure), PhoneService, MultipleLines, InternetService, OnlineSecurity,  OnlineBackup, TechSupport, StreamingMovies, Contract, PaperlessBilling, PaymentMethod]])
     # creating the dataframe 
     X_sample = pd.DataFrame(data=feature_vals,  
                   columns = features) 
