@@ -7,13 +7,9 @@ import numpy as np  # Ensure you import NumPy
 churn = pd.read_csv("./telco_churn_data.csv")
 
 st.write("""
-# Telco churn prediction
+ Telco churn prediction
 """)
-
-def model_pred(SeniorCitizen, tenure, PhoneService, MultipleLines, InternetService, OnlineSecurity,  OnlineBackup, TechSupport, StreamingMovies, Contract, PaperlessBilling, PaymentMethod)
-):
-    # Convert input parameters to numeric types directly in Streamlit widgets
-    
+def model_pred(SeniorCitizen, tenure, PhoneService, MultipleLines, InternetService, OnlineSecurity,  OnlineBackup, TechSupport, StreamingMovies, Contract, PaperlessBilling, PaymentMethod):
     # Load the model
     with open("telco_churn_prediction.pkl", "rb") as file:
         pipeline = pickle.load(file)
