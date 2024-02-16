@@ -6,9 +6,10 @@ import numpy as np  # Ensure you import NumPy
 
 churn = pd.read_csv("./telco_churn_data.csv")
 
-st.write("""
+st.head("""
  #Telco churn prediction
 """)
+
 def model_pred(SeniorCitizen, tenure, PhoneService, MultipleLines, InternetService, OnlineSecurity,  OnlineBackup, TechSupport, StreamingMovies, Contract, PaperlessBilling, PaymentMethod):
     # Load the model
     with open("telco_churn_prediction.pkl", "rb") as file:
@@ -26,49 +27,58 @@ def model_pred(SeniorCitizen, tenure, PhoneService, MultipleLines, InternetServi
     
     #Prediction logic
     predicted_probabilities = pipeline.predict_proba(X_sample)
-    #print(predicted_probabilities[:, 1])
+    st.write(predicted_probabilities[:, 1])
+    st.write(best_threshold)
     predicted_classes = (predicted_probabilities[:, 1] >= best_threshold).astype(int)
-    #print(best_threshold)
     return predicted_classes[0]
 
 col1, col2, col3, col4, col5, col6, col7, col8, col9, col10, col11 = st.columns(11)
 
 with col1:
     SeniorCitizen = st.selectbox("Is the subscriber senior citizen? ", [0, 1])
-st.markdown("###")
-
+# Add vertical space
+st.markdown("<br><br>", unsafe_allow_html=True)
 with col2:
     PhoneService = st.selectbox("Does the subscriber have a Phone service?", [0, 1])
-st.markdown("###")
+# Add vertical space
+st.markdown("<br><br>", unsafe_allow_html=True)
 with col3:
     MultipleLines = st.selectbox("Does the subscriber have multiple phone lines?", ['No', 'No phone service', 'Yes'])
-st.write("\n")
+# Add vertical space
+st.markdown("<br><br>", unsafe_allow_html=True)
 with col4:
     InternetService = st.selectbox("Does the subscriber have internet service?", ['DSL', 'Fiber optic', 'No'])
-st.write("")
+# Add vertical space
+st.markdown("<br><br>", unsafe_allow_html=True)
 with col5:
     OnlineSecurity = st.selectbox("Does the subscriber have Online Security service?", ['No', 'No internet service', 'Yes'])
-st.write("")
+# Add vertical space
+st.markdown("<br><br>", unsafe_allow_html=True)
 with col6:
     OnlineBackup = st.selectbox("Does the subscriber have Online backup service?", ['No', 'No internet service', 'Yes'])
-st.write("")
+# Add vertical space
+st.markdown("<br><br>", unsafe_allow_html=True)
 with col7:
     TechSupport = st.selectbox("Does the subscriber have Tech Support service?", ['No', 'No internet service', 'Yes'])
-st.write("")
+# Add vertical space
+st.markdown("<br><br>", unsafe_allow_html=True)
 with col8:
     StreamingMovies = st.selectbox("Does the subscriber have Streaming Movies service?", ['No', 'No internet service', 'Yes'])
-st.write("")
+# Add vertical space
+st.markdown("<br><br>", unsafe_allow_html=True)
 with col9:
     Contract = st.selectbox("What type of contract does the subscriber have?", ['Month-to-month', 'One year', 'Two year'])
-st.write("")    
+# Add vertical space
+st.markdown("<br><br>", unsafe_allow_html=True)
 with col10:
     PaperlessBilling = st.selectbox("Does the subscriber have paperless billing?", [0, 1])
-st.write("")    
+# Add vertical space
+st.markdown("<br><br>", unsafe_allow_html=True)
 with col11:
     PaymentMethod = st.selectbox("What type of payment method does the subscriber have?", ['Electronic check', 'Mailed check', 'Bank transfer (automatic)', 'Credit card (automatic)'])
-st.write("")    
+# Add vertical space
+st.markdown("<br><br>", unsafe_allow_html=True)
 tenure = st.slider("Lenght of duration of the account with the service provider(in months): ", 0, 108, step=4)
-
 if st.button("Predict Churn"):
     pr = model_pred(SeniorCitizen, tenure, PhoneService, MultipleLines, InternetService, OnlineSecurity,  OnlineBackup, TechSupport, StreamingMovies, Contract, PaperlessBilling, PaymentMethod)
     if pr == 0:
